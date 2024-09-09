@@ -1,0 +1,32 @@
+# dependencies
+/node_modules
+.next
+.vscode
+
+# testing
+/coverage
+
+# production
+/dist
+/build
+/out
+
+#cache
+/.cache
+
+# misc
+.DS_Store
+.Spotlight-V100
+Thumbs.db
+
+# Package
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment Variables
+.env
+.env.local
+
+# Typescript
+tsconfig.tsbuildinfo

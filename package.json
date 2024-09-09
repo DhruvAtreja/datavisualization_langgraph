@@ -1,0 +1,12 @@
+{
+  "name": "datavisualization_langgraph",
+  "private": false,
+  "version": "0.0.0",
+  "author": "Dhruv Atreja",
+  "license": "MIT",
+  "workspaces": [
+    "frontend",
+    "backend_py",
+    "backend_js"
+  ]
+}

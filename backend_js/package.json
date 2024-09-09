@@ -1,0 +1,23 @@
+{
+  "name": "data-visualization",
+  "version": "1.0.0",
+  "description": "Data Visualization using Langgraph",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx tsx my_agent/index.ts"
+  },
+  "dependencies": {
+    "@langchain/community": "^0.2.31",
+    "@langchain/core": "^0.2.31",
+    "@langchain/langgraph": "^0.2.2",
+    "@langchain/openai": "^0.2.8",
+    "axios": "^1.7.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7",
+    "tsx": "^4.19.0",
+    "typescript": "^5"
+  }
+}
