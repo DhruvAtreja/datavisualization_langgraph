@@ -10,7 +10,6 @@ class DatabaseManager:
     def get_schema(self, uuid: str) -> str:
         """Retrieve the database schema."""
         try:
-            print(f"{self.endpoint_url}/get-schema/{uuid}")
             response = requests.get(
                 f"{self.endpoint_url}/get-schema/{uuid}"
             )
