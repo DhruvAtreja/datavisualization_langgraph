@@ -114,11 +114,35 @@ class DataFormatter {
       };
       return { formatted_data_for_visualization: formatted_data };
     } else if (results[0].length === 3) {
-      const data_by_label: Record<string, number[]> = {};
+      const data_by_label: Record<string, any[]> = {};
       const x_values: string[] = [];
 
+      // Get a list of unique labels
+      const labels = [
+        ...new Set(
+          results
+            .filter(
+              ([item1, item2]: [any, any]) =>
+                (typeof item2 === "string" &&
+                  isNaN(parseFloat(item2)) &&
+                  !item2.includes("/")) ||
+                (typeof item1 === "string" &&
+                  isNaN(parseFloat(item1)) &&
+                  !item1.includes("/"))
+            )
+            .map(([item1, item2]: [any, any]) =>
+              typeof item2 === "string" &&
+              isNaN(parseFloat(item2)) &&
+              !item2.includes("/")
+                ? item2
+                : item1
+            )
+        ),
+      ];
+
       for (const [item1, item2, item3] of results) {
-        let label: string, x: any, y: number;
+        let label, x, y;
+        // Determine which item is the label (string not convertible to float and not containing "/")
         if (
           typeof item1 === "string" &&
           isNaN(parseFloat(item1)) &&
@@ -135,9 +159,19 @@ class DataFormatter {
         if (!data_by_label[label]) {
           data_by_label[label] = [];
         }
-        data_by_label[label].push(y);
+        data_by_label[label].push(parseFloat(y));
+
+        for (const other_label of labels) {
+          if (other_label !== label) {
+            if (!data_by_label[other_label as string]) {
+              data_by_label[other_label as string] = [];
+            }
+            data_by_label[other_label as string].push(null);
+          }
+        }
       }
 
+      // Create yValues array
       const y_values = Object.entries(data_by_label).map(([label, data]) => ({
         data,
         label,
@@ -149,6 +183,7 @@ class DataFormatter {
         yAxisLabel: "",
       };
 
+      // Use LLM to get a relevant label for the y-axis
       const prompt = ChatPromptTemplate.fromMessages([
         [
           "system",
@@ -160,7 +195,7 @@ class DataFormatter {
         ],
       ]);
       const y_axis_label = await this.llm_manager.invoke(prompt, {
-        question,
+        question: question,
         data: JSON.stringify(results.slice(0, 2)),
       });
 

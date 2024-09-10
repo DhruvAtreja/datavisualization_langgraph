@@ -151,6 +151,7 @@ app.post("/upload-file", upload.single("file"), async (req, res) => {
 // Endpoint for executing SQL queries on uploaded databases
 app.post("/execute-query", (req, res) => {
   const { uuid, query } = req.body;
+  console.log(uuid, query);
 
   if (!uuid || !query) {
     return res.status(400).json({ error: "Missing uuid or query" });

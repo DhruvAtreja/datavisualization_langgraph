@@ -134,6 +134,7 @@ const LineGraph: React.FC<LineGraphProps> = ({ data }) => {
     }),
     yValues: data.yValues.map((series) => ({
       ...series,
+      connectNulls: true,
       data: data.xValues
         .map((x, i) => ({ x, y: series.data[i] }))
         .sort((a, b) => {

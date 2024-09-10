@@ -31,33 +31,6 @@ The project uses a LangGraph-based workflow to process queries, generate SQL, an
 
 ### Setup
 
-#### Backend
-
-Go to the `backend_py` or `backend_js` directory:
-
-1. Set up the following environment variables:
-
-   ```
-   OPENAI_API_KEY=
-   DB_ENDPOINT_URL=http://host.docker.internal:3001
-   ```
-
-   Note: Since LangGraph Studio runs your backend on a Docker container, you need to use `host.docker.internal` instead of `localhost` here.
-
-2. Upload the directory to LangGraph Studio.
-
-#### Frontend
-
-1. `cd frontend`
-2. Set up the following environment variables:
-   ```
-   NEXT_PUBLIC_SQLITE_URL=http://localhost:3001
-   LANGGRAPH_API_URL=
-   ```
-   Note: LANGGRAPH_API_URL is the URL you will find on LangGraph Studio. It changes each time you start the backend instance.
-3. `yarn install`
-4. `yarn dev`
-
 #### SQLite Server
 
 This server has been built to allow uploading of SQL and CSV files under 1MB. It automatically cleans up files after 4 hours.
@@ -67,6 +40,33 @@ It also has a default database which is used when you don't upload any file.
 1. `cd sqlite_server`
 2. `yarn install`
 3. `yarn start`
+
+#### Backend
+
+Go to the `backend_py` or `backend_js` directory:
+
+1.Create a .env file (you can use .env.example). Set up the following environment variables i:
+
+```
+OPENAI_API_KEY=
+DB_ENDPOINT_URL=http://host.docker.internal:3001
+```
+
+Note: Since LangGraph Studio runs your backend on a Docker container, you need to use `host.docker.internal` instead of `localhost` here.
+
+2. Open the directory to LangGraph Studio.
+
+#### Frontend
+
+1. `cd frontend`
+2. Create a .env file (you can use .env.example). Set up the following environment variables:
+   ```
+   NEXT_PUBLIC_SQLITE_URL=http://localhost:3001
+   LANGGRAPH_API_URL=
+   ```
+   Note: LANGGRAPH_API_URL is the URL you will find on LangGraph Studio. It changes each time you start the backend instance.
+3. `yarn install`
+4. `yarn dev`
 
 ## Usage
 

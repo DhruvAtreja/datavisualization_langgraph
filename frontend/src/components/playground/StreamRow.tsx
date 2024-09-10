@@ -24,7 +24,7 @@ export const StreamRow = ({ heading, information }: { heading: string; informati
       onMouseLeave={() => setIsHovered(false)}
     >
       <div className='absolute top-2 left-2 text-sm font-bold text-blue-500'>{heading}</div>
-      <div className='mt-4 ml-10 text-sm text-left overflow-x-hidden'>{information}</div>
+      <div className='mt-4 ml-10 text-sm text-left overflow-x-scroll'>{information}</div>
     </div>
   )
 }

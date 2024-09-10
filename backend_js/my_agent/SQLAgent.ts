@@ -116,10 +116,10 @@ Here are some examples:
 Answer: SELECT product_name, SUM(quantity) as total_quantity FROM sales WHERE product_name IS NOT NULL AND quantity IS NOT NULL AND product_name != "" AND quantity != "" AND product_name != "N/A" AND quantity != "N/A" GROUP BY product_name ORDER BY total_quantity DESC LIMIT 1
 
 2. What is the total revenue for each product?
-Answer: SELECT product_name, SUM(quantity * price) as total_revenue FROM sales WHERE product_name IS NOT NULL AND quantity IS NOT NULL AND price IS NOT NULL AND product_name != "" AND quantity != "" AND price != "" AND product_name != "N/A" AND quantity != "N/A" AND price != "N/A" GROUP BY product_name ORDER BY total_revenue DESC
+Answer: SELECT \`product name\`, SUM(quantity * price) as total_revenue FROM sales WHERE \`product name\` IS NOT NULL AND quantity IS NOT NULL AND price IS NOT NULL AND \`product name\` != "" AND quantity != "" AND price != "" AND \`product name\` != "N/A" AND quantity != "N/A" AND price != "N/A" GROUP BY \`product name\`  ORDER BY total_revenue DESC
 
 3. What is the market share of each product?
-Answer: SELECT product_name, SUM(quantity) * 100.0 / (SELECT SUM(quantity) FROM sales) as market_share FROM sales WHERE product_name IS NOT NULL AND quantity IS NOT NULL AND product_name != "" AND quantity != "" AND product_name != "N/A" AND quantity != "N/A" GROUP BY product_name ORDER BY market_share DESC
+Answer: SELECT \`product name\`, SUM(quantity) * 100.0 / (SELECT SUM(quantity) FROM sa  les) as market_share FROM sales WHERE \`product name\` IS NOT NULL AND quantity IS NOT NULL AND \`product name\` != "" AND quantity != "" AND \`product name\` != "N/A" AND quantity != "N/A" GROUP BY \`product name\`  ORDER BY market_share DESC
 
 4. Plot the distribution of income over time
 Answer: SELECT income, COUNT(*) as count FROM users WHERE income IS NOT NULL AND income != "" AND income != "N/A" GROUP BY income
@@ -131,7 +131,7 @@ or
              
 For questions like "plot a distribution of the fares for men and women", count the frequency of each fare and plot it. The x axis should be the fare and the y axis should be the count of people who paid that fare.
 SKIP ALL ROWS WHERE ANY COLUMN IS NULL or "N/A" or "".
-Just give the query string. Do not format it. Make sure to use the correct spellings of nouns as provided in the unique nouns list.
+Just give the query string. Do not format it. Make sure to use the correct spellings of nouns as provided in the unique nouns list. All the table and column names should be enclosed in backticks.
 `,
       ],
       [
@@ -181,7 +181,7 @@ Generate SQL query string`,
         `
 You are an AI assistant that validates and fixes SQL queries. Your task is to:
 1. Check if the SQL query is valid.
-2. Ensure all table and column names are correctly spelled and exist in the schema.
+2. Ensure all table and column names are correctly spelled and exist in the schema. All the table and column names should be enclosed in backticks.
 3. If there are any issues, fix them and provide the corrected SQL query.
 4. If no issues are found, return the original query.
 
@@ -218,7 +218,13 @@ For example:
 2. {{
     "valid": false,
     "issues": "Column USERS does not exist",
-    "corrected_query": "SELECT * FROM users WHERE age > 25"
+    "corrected_query": "SELECT * FROM \`users\` WHERE age > 25"
+}}
+
+3. {{
+    "valid": false,
+    "issues": "Column names should be enclosed in backticks if they contain spaces or special characters",
+    "corrected_query": "SELECT * FROM \`gross income\` WHERE age > 25"
 }}
 `,
       ],
