@@ -4,5 +4,9 @@
   "description": "Upload SQLite or CSV files, query the data using natural language, and visualize the results. It's built with Next.js for the frontend, uses LangChain and LangGraph Cloud for text to SQL and data visualization, and includes a custom server for handling SQLite and CSV files.",
   "scripts": {
     "test": ""
+  },
+  "devDependencies": {
+    "@commitlint/cli": "19.5.0",
+    "@commitlint/config-conventional": "19.5.0"
   }
 }
